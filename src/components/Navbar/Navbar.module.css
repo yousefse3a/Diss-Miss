@@ -1,0 +1,31 @@
+.img {
+    mix-blend-mode: multiply;
+    filter: contrast(1);
+    width: 180px;
+  }
+  
+  .btn {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    border-radius: 5px;
+    padding: 10px 0;
+    box-sizing: border-box;
+    transition: all .25s linear;
+  }
+  
+  .switch {
+    border-radius: 25px;
+    font-size: 25px;
+    aspect-ratio: 2/1;
+  }
+  
+  .switch>div {
+    border: 1px solid transparent;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    transition: all 0.25s linear;
+  }

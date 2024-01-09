@@ -9,6 +9,7 @@ import Register from "./Register/Register";
 import NotFound from "./NotFound/NotFound";
 import Bestseller from "./Bestseller/Bestseller";
 import Products from "./Products/Products";
+import Carttosta from "../components/Carttosta/Carttosta";
 // const LazyHome = React.lazy(() => import("./Home/Home"));
 
 export default function routers() {
@@ -19,10 +20,9 @@ export default function routers() {
       children: [
         {
           index: true,
-          element: (
-            <Home />
-          ),
+          element: <Home />,
         },
+        { path: "/t", element: <Carttosta /> },
         { path: "/Bestseller", element: <Bestseller /> },
         { path: "/AllProducts", element: <Products /> },
         { path: "/checkout", element: <Checkout /> },

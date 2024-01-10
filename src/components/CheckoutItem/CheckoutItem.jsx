@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Badge, Box, Grid } from "@mui/material";
+import { Badge, Box, Collapse, Grid } from "@mui/material";
 import tempImg from "../../assets/temp.webp";
 import React from "react";
 
@@ -11,7 +11,6 @@ export default function CheckoutItem() {
         justifyContent: "space-between",
         alignItems: "center",
         width: "100%",
-        // background: "green",
         boxSizing: "border-box",
         padding: ".5rem",
       }}
@@ -41,6 +40,7 @@ export default function CheckoutItem() {
       <Grid>
         EG <span>1500</span>
       </Grid>
+     
     </Grid>
   );
 }

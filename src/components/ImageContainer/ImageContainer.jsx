@@ -57,20 +57,20 @@ export default function ImageContainer({ imgList }) {
     <>
       <Box>
         <Grid container spacing={1}>
-          {imgList.map((item, i) => (
+          {/* {imgList.map((item, i) => ( */}
 
             <>
               <Grid
                 item
                 xs={12}
-                md={i == 0 ? 12 : 6}
-                display={i == 0 ? "" : "none"}
+                // md={i == 0 ? 12 : 6}
+                // display={i == 0 ? "" : "none"}
                 className={classes.imageContainer}
               >
                 <Box
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
-                  key={i}
+                  // key={i}
                   sx={{ cursor: "pointer" }}
                 >
                   {isHovered && (
@@ -80,16 +80,16 @@ export default function ImageContainer({ imgList }) {
                   <img
                     onClick={() => {
                       console.log("HElllooo");
-                      openModal(i);
+                      openModal();
                     }}
                     width="100%"
-                    src={item}
+                    src={imgList}
                     loading="lazy"
                   />
                 </Box>
               </Grid>
             </>
-          ))}
+          {/* ))} */}
 
           {modalOpen && (
             <ImageModal

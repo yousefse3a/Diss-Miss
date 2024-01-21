@@ -15,15 +15,15 @@ export default function ImageModal({ images, selectedImageIndex, closeModal }) {
   return (
     <div className={classes.modalOverlay} onClick={closeModal}>
       <div className={classes.modalContent}>
-        {images.map((imageUrl, index) => (
+        {/* {images.map((imageUrl, index) => ( */}
           <img
-            key={index}
-            src={imageUrl}
-            alt={`Description of image ${index + 1}`}
-            className={index === selectedImageIndex ? classes.active : ""}
-            ref={index === selectedImageIndex ? activeImageRef : null}
+            // key={index}
+            src={images}
+            // alt={`Description of image ${index + 1}`}
+            // className={index === selectedImageIndex ? classes.active : ""}
+            // ref={index === selectedImageIndex ? activeImageRef : null}
           />
-        ))}
+        {/* ))} */}
       </div>
     </div>
   );

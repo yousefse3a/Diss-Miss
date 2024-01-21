@@ -1,5 +1,11 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
-import React from "react";
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import poster from "../../assets/DeskTop.jpg";
 import posterMob from "../../assets/Mobile.jpg";
 import Product from "../../components/Product/Product";
@@ -19,6 +25,7 @@ import imageD from "../../assets/iamge4.webp";
 import aruroa1 from "../../assets/Aurora1.webp";
 import aruroa2 from "../../assets/Aurora2.webp";
 import { relatedProducts } from "../../Data/data";
+import { getEntity, getEntityByID } from "../../API/getAPIs";
 // const relatedProducts = [
 //   {
 //     imgSrc1: image5,
@@ -118,6 +125,18 @@ let categoryStyle = (imgSRC) => {
   return x;
 };
 export default function Home() {
+  // getEntity({pageNumber:1})
+
+  const [pageNumber, setPageNumber] = useState(1);
+  const [allProduct, setAllProduct] = useState([]);
+  const [loading, setLoading] = useState(false);
+  console.log(allProduct);
+  
+  useEffect(() => {
+    getEntity({ pageNumber, setLoading, setAllProduct });
+    
+  }, [pageNumber]);
+
   return (
     <>
       <Box
@@ -145,7 +164,7 @@ export default function Home() {
           return (
             <>
               <Grid
-                key={index}
+key={index}
                 item
                 xs={12}
                 md={4}
@@ -182,13 +201,29 @@ export default function Home() {
           Our Products
         </Typography>
 
-        <Grid item xs={12} md={12} sx={{ marginY: "2rem" }}>
-          <Grid container>
-            {relatedProducts.map((item, i) => {
-              return <RelatedProduct key={i} item={item} />;
-            })}
+        {loading ? (
+          <CircularProgress size={"1.5rem"} />
+        ) : (
+          <Grid item xs={12} md={12} sx={{ marginY: "2rem" }}>
+            <Grid container>
+              {/* {relatedProducts.map((item, i) => {
+                return (
+                  // <Link to="/SingleProduct">
+                  <RelatedProduct key={i} item={item} />
+                  // </Link>
+                );
+              })} */}
+              {allProduct.map((item, i) => {
+                return (
+                  // <Link to="/SingleProduct">
+                  <RelatedProduct key={i} item={item} />
+                  // </Link>
+                );
+              })}
+            </Grid>
           </Grid>
-        </Grid>
+        )}
+
         <Box
           sx={{
             marginY: "1rem",
@@ -204,6 +239,9 @@ export default function Home() {
               color: "#c6565a",
               background: "#fff",
             },
+          }}
+          onClick={() => {
+            setPageNumber((prev) => (prev += 1));           
           }}
         >
           View More

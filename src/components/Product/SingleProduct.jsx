@@ -1,5 +1,12 @@
-import React from "react";
-import { Grid, Box, Paper, Container, Card } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Grid,
+  Box,
+  Paper,
+  Container,
+  Card,
+  CircularProgress,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ImageContainer from "../ImageContainer/ImageContainer";
 import Info from "../Info/Info";
@@ -13,7 +20,8 @@ import imageD from "../../assets/iamge4.webp";
 import aruroa1 from "../../assets/Aurora1.webp";
 import aruroa2 from "../../assets/Aurora2.webp";
 import { useLocation } from "react-router-dom";
-import { relatedProducts } from "../../Data/data"
+import { relatedProducts } from "../../Data/data";
+import { getEntityByID } from "../../API/getAPIs";
 
 // const relatedProducts = [
 //   {
@@ -135,49 +143,74 @@ import { relatedProducts } from "../../Data/data"
 // ];
 
 export default function SingleProduct() {
-
   const location = useLocation();
-  const projectID = location.pathname.split("/").slice(-1)[0].toLocaleLowerCase();
+  const projectID = location.pathname
+    .split("/")
+    .slice(-1)[0]
+    .toLocaleLowerCase();
 
   window.scrollTo(0, 0);
 
-  const product = relatedProducts.find((item) => {
+  // const product = relatedProducts.find((item) => {
+  //   if (item.id == projectID) {
+  //     return item;
+  //   }
+  // });
+  // console.log(product);
+  const [loading, setLoading] = useState(false);
+  const [sProduct, setSProduct] = useState({});
+  const productByName = sProduct.productsByName ? sProduct.productsByName[0] : [] ;
+  const productByColor = sProduct.productsByColor;
 
-    if (item.id == projectID) {
-      return item
-    }
-  })
-  console.log(product)
+  console.log("sProduct");
+  console.log(sProduct);
+
+  useEffect(() => {
+    console.log("Dasdasd");
+    getEntityByID({ productID: projectID, setLoading, setSProduct });
+  }, []);
 
   return (
     <>
-      <Container maxWidth="xl" sx={{ mb: "2rem", mt: "2rem" }}>
-        <Box sx={{ width: "100%" }}>
-          <Grid container rowSpacing={1}>
-            <Grid item xs={12} md={7} sx={{ mr: "1rem" }}>
-              {/* <Item sx={{ m: "5px" }}> */}
-              <Box>
-                <ImageContainer imgList={product.imgList} />
-              </Box>
-            </Grid>
-
-            <Grid item xs={12} md={4}>
-              <Box>
-                <Info product={product} />
-              </Box>
-            </Grid>
-
-            <Box sx={{ fontSize: "2rem", mt: "2rem" }}>You may also like</Box>
-            <Grid item xs={12} md={12}>
-              <Grid container rowGap={1}>
-                {relatedProducts.map((item, i) => {
-                  return <RelatedProduct key={i} item={item} />;
-                })}
-              </Grid>
-            </Grid>
+      {loading ? (
+        <Container>
+          <Grid container justifyContent={"center"} sx={{ py: "3rem" }}>
+            <CircularProgress size={"1.5rem"} />
           </Grid>
-        </Box>
-      </Container>
+        </Container>
+      ) : (
+        <>
+          <Container maxWidth="xl" sx={{ mb: "2rem", mt: "2rem" }}>
+            <Box sx={{ width: "100%" }}>
+              <Grid container rowSpacing={1}>
+                <Grid item xs={12} md={7} sx={{ mr: "1rem" }}>
+                  {/* <Item sx={{ m: "5px" }}> */}
+                  <Box>
+                    <ImageContainer imgList={productByName.media_url} />
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12} md={4}>
+                  <Box>
+                    <Info productByName={productByName} productByColor={productByColor}  />
+                  </Box>
+                </Grid>
+
+                {/* <Box sx={{ fontSize: "2rem", mt: "2rem" }}>
+                  You may also like
+                </Box>
+                <Grid item xs={12} md={12}>
+                  <Grid container rowGap={1}>
+                    {relatedProducts.map((item, i) => {
+                      return <RelatedProduct key={i} item={item} />;
+                    })}
+                  </Grid>
+                </Grid> */}
+              </Grid>
+            </Box>
+          </Container>
+        </>
+      )}
     </>
   );
 }

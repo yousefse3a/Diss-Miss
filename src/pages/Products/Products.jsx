@@ -1,5 +1,6 @@
 import {
   Box,
+  CircularProgress,
   Container,
   FormControl,
   Grid,
@@ -8,9 +9,9 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Product from "../../components/Product/Product";
-import { Link, useLocation,Outlet } from "react-router-dom";
+import { Link, useLocation, Outlet } from "react-router-dom";
 import RelatedProduct from "../../components/RelatedProducts/RelatedProduct";
 import imageA from "../../assets/image1.webp";
 import imageB from "../../assets/image2.webp";
@@ -20,7 +21,8 @@ import imageC from "../../assets/image3.webp";
 import imageD from "../../assets/iamge4.webp";
 import aruroa1 from "../../assets/Aurora1.webp";
 import aruroa2 from "../../assets/Aurora2.webp";
-import  {relatedProducts} from "../../Data/data"
+import { relatedProducts } from "../../Data/data";
+import { getEntity } from "../../API/getAPIs";
 
 // const relatedProducts = [
 //   {
@@ -113,6 +115,9 @@ export default function Products() {
 
   const [color, setcolor] = React.useState("");
   const [sort, setsort] = React.useState("");
+  const [pageNumber, setPageNumber] = React.useState(1);
+  const [allProduct, setAllProduct] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
 
   const handleColor = (event) => {
     setcolor(event.target.value);
@@ -121,13 +126,16 @@ export default function Products() {
   const handleSort = (event) => {
     setsort(event.target.value);
   };
+  useEffect(() => {
+    getEntity({ pageNumber, setLoading, setAllProduct });
+  }, [pageNumber]);
+
   return (
     <Container>
-
-      {current != "allproducts" ?
-        <Outlet></Outlet> : <>
-
-
+      {current != "allproducts" ? (
+        <Outlet></Outlet>
+      ) : (
+        <>
           <Grid
             sx={{
               display: "flex",
@@ -152,12 +160,10 @@ export default function Products() {
                     sx={{
                       mx: "1rem",
                       minWidth: 120,
-                      "&  .Mui-focused":
-                      {
+                      "&  .Mui-focused": {
                         color: "#666 !important",
-                        borderColor: "#666  !important"
+                        borderColor: "#666  !important",
                       },
-
                     }}
                     size="small"
                   >
@@ -201,23 +207,47 @@ export default function Products() {
             </Grid>
           </Grid>
 
-          <Grid item xs={12} md={12} sx={{ mt: "2rem", mb: "2rem" }}>
+          {/* <Grid item xs={12} md={12} sx={{ mt: "2rem", mb: "2rem" }}>
             <Grid container rowGap={1}>
-
               {relatedProducts.map((item, i) => {
                 return (
                   // <Link to={`/AllProducts/${item.id}`}>
-                    <RelatedProduct key={i} item={item} />
+                  <RelatedProduct key={i} item={item} />
                   // </Link>
                 );
               })}
             </Grid>
-          </Grid>
-
+          </Grid> */}
+          {loading ? (
+            <Container>
+              <Grid container justifyContent={"center"} sx={{ py: "3rem" }}>
+                <CircularProgress size={"1.5rem"} />
+              </Grid>
+            </Container>
+          ) : (
+            <>
+              <Grid item xs={12} md={12} sx={{ marginY: "2rem" }}>
+                <Grid container>
+                  {/* {relatedProducts.map((item, i) => {
+                return (
+                  // <Link to="/SingleProduct">
+                  <RelatedProduct key={i} item={item} />
+                  // </Link>
+                );
+              })} */}
+                  {allProduct.map((item, i) => {
+                    return (
+                      // <Link to="/SingleProduct">
+                      <RelatedProduct key={i} item={item} />
+                      // </Link>
+                    );
+                  })}
+                </Grid>
+              </Grid>
+            </>
+          )}
         </>
-      }
-
-
+      )}
 
       {/* <Grid
           container
@@ -240,8 +270,40 @@ export default function Products() {
           <Product />
           <Product />
         </Grid> */}
+      {current == "allproducts" ? (
+        <>
+          <Container>
+            <Grid container justifyContent={"center"} sx={{ py: "3rem" }}>
+              <Grid>
+                <Box
+                  sx={{
+                    marginY: "1rem",
+                    padding: ".8rem 1rem",
+                    boxSizing: "border-box",
 
-
+                    background: "#c6565a",
+                    color: "#fff",
+                    borderRadius: "5px",
+                    border: "1px #c6565a solid",
+                    transition: ".5s",
+                    "&:hover": {
+                      color: "#c6565a",
+                      background: "#fff",
+                    },
+                  }}
+                  onClick={() => {
+                    setPageNumber((prev) => (prev += 1));
+                  }}
+                >
+                  View More
+                </Box>
+              </Grid>
+            </Grid>
+          </Container>
+        </>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 }

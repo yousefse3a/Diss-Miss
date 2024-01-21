@@ -25,7 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Cart() {
-  const userToken = useSelector((state) => state.user.userToken);
+const userToken = useSelector((state) => state.user.userToken);
   const [quantity, setQuantity] = useState(1);
   const [finalPrice, setFinalPrice] = useState(1);
   const [price, setPrice] = useState(1040);

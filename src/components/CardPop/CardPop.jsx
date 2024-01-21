@@ -68,7 +68,7 @@ export default function CardPop({ handleClose, open, product, quantity }) {
               id="alert-dialog-slide-description"
               sx={{ mt: "1rem" }}
             >
-              <img src={product.imgList[0]} width={"20%"} />
+              <img src={product.media_url} width={"20%"} />
             </DialogContentText>
           </DialogContent>
 

@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 // const LazyHome = React.lazy(() => import("./Home/Home"));
 
 export default function Routers() {
-  const userToken = useSelector((state) => state.user.userToken);
+const userToken = useSelector((state) => state.user.userToken);
 
   const routers = createBrowserRouter([
     {

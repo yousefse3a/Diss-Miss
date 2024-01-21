@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import { useState } from "react";
 import { Box, Button, Grid, Container } from "@mui/material";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +9,9 @@ import { Logout } from "../../Redux/userSlice";
 
 export default function Profile(props) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+const dispatch = useDispatch();
 
-  function handleLogOut() {
+function handleLogOut() {
     // dispatch(updateUserCartApi(userToken));
     // dispatch(deleteCart());
     dispatch(Logout());

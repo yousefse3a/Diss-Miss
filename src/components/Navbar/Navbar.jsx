@@ -32,7 +32,7 @@ const StyledBadge = styled(Badge)({
 });
 
 export default function Navbar() {
-  const userToken = useSelector((state) => state.user.userToken);
+const userToken = useSelector((state) => state.user.userToken);
 
   const [mobMenuIcon, setmobMenuIcon] = useState(false);
   const menu = useRef();
@@ -48,7 +48,6 @@ export default function Navbar() {
       : (menu.current.style.left = "-100%");
   };
 
-
   return (
     <>
       <Grid>
@@ -60,7 +59,7 @@ export default function Navbar() {
               item
               sx={{
                 display: { xs: "none", md: "flex" },
-                visibility:"hidden",
+visibility:"hidden",
                 justifyContent: "space-between",
                 alignItems: "center",
                 alignContent: "stretch",

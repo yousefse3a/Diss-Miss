@@ -22,6 +22,7 @@ import {
 import classess from "./Info.module.css";
 import CardPop from "../CardPop/CardPop";
 import { useNavigate } from "react-router";
+import ColorOption from "../ColorOption/ColorOption";
 
 const sizes = ["xl", "xxl", "sm"];
 const products = [
@@ -40,7 +41,7 @@ const products = [
   },
 ];
 
-export default function Info({ product }) {
+export default function Info({ productByName, productByColor }) {
   // States
   const [size, setSize] = useState("");
   const [textQen, setTextQen] = useState(false);
@@ -49,7 +50,6 @@ export default function Info({ product }) {
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState([]);
   const navigate = useNavigate();
-
 
   const [expanded, setExpanded] = useState(false);
 
@@ -78,32 +78,29 @@ export default function Info({ product }) {
     <>
       <Grid sx={{ pl: "2rem" }} container>
         <Grid item xs={12} md={12}>
-          <Typography
-            sx={{ color: "#666", fontSize: "10px" }}
-            gutterBottom
-          >
+          <Typography sx={{ color: "#666", fontSize: "10px" }} gutterBottom>
             DODICI
           </Typography>
         </Grid>
 
         <Grid item xs={12} md={12}>
           <Typography sx={{ color: "#1a1a1a ", fontSize: "40px" }} gutterBottom>
-            {product.title}
+            {productByName.title}
           </Typography>
         </Grid>
 
         <Grid item xs={12} md={12}>
           <Typography sx={{ color: "#1a1a1a ", fontSize: "18px" }} gutterBottom>
             <Grid container>
-              {product.onSale ? (
+              {productByName.onSale ? (
                 <>
                   <Box sx={{ textDecoration: "line-through", mr: "1rem" }}>
-                    LE {product.priceBeforeSale} EGP
+                    LE {productByName.priceBeforeSale} EGP
                   </Box>
-                  <Box >LE {product.price} EGP</Box>
+                  <Box>LE {productByName.price} EGP</Box>
                 </>
               ) : (
-                <Box >LE {product.price} EGP</Box>
+                <Box>LE {productByName.price} EGP</Box>
               )}
             </Grid>
           </Typography>
@@ -142,7 +139,7 @@ export default function Info({ product }) {
           ></Typography>
           <Grid container justifyContent="flex-start" sx={{ mb: "1.2rem" }}>
             Colors :
-            {products.map((color, i) => {
+            {/* {products.map((color, i) => {
               return (
                 <Box
                   key={i}
@@ -153,14 +150,15 @@ export default function Info({ product }) {
                     handleColorChange(color.color);
                   }}
                 >
-                  {/* {color.color == selectedColor ? (
-                    <CheckIcon sx={{ color: "white" }} />
-                  ) : (
-                    ""
-                  )} */}
+             
                 </Box>
               );
-            })}
+            })} */}
+           
+            <ColorOption
+              dataObject={productByColor}
+              setSelectedSize={setSelectedSize}
+            />
             <Grid container justifyContent="flex-start">
               <FormControl sx={{ width: "9rem", mt: "1.5rem" }}>
                 <InputLabel id="demo-simple-select-label">Size</InputLabel>
@@ -271,7 +269,12 @@ export default function Info({ product }) {
           >
             Add to cart
           </Box>
-          <CardPop product={product} handleClose={handleClose} open={open} quantity={quantity} ></CardPop>
+          <CardPop
+            product={productByName}
+            handleClose={handleClose}
+            open={open}
+            quantity={quantity}
+          ></CardPop>
         </Grid>
 
         <Grid item xs={12} md={12} sx={{ mt: "20px", mb: "1.5rem" }}>
@@ -283,10 +286,8 @@ export default function Info({ product }) {
                 bgcolor: "#738964",
                 border: "none",
               },
-              
             }}
-            onClick={()=>
-            {
+            onClick={() => {
               navigate("/cart");
             }}
             className={classess.addToCart}
@@ -301,9 +302,8 @@ export default function Info({ product }) {
           md={12}
           sx={{ mt: "20px", color: "#1a1a1a", mb: "1.5rem" }}
         >
-          Olive shoulder bag
+          {productByName.description}
         </Grid>
-
 
         <Grid item xs={12} md={12} sx={{ mt: "20px" }}>
           <Accordion
@@ -323,7 +323,9 @@ export default function Info({ product }) {
               <StraightenIcon sx={{ mr: "0.3rem" }} /> Dimensions
             </AccordionSummary>
             <AccordionDetails>
-              <Typography sx={{ color: "#1a1a1a" }}></Typography>
+              <Typography sx={{ color: "#1a1a1a" }}>
+                {productByName.size}
+              </Typography>
             </AccordionDetails>
           </Accordion>
         </Grid>

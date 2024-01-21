@@ -15,6 +15,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import QuanButton from "../../components/Quantity/QuanButton";
 import CartEmpty from "./CartEmpty";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -24,6 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Cart() {
+  const userToken = useSelector((state) => state.user.userToken);
   const [quantity, setQuantity] = useState(1);
   const [finalPrice, setFinalPrice] = useState(1);
   const [price, setPrice] = useState(1040);

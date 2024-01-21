@@ -23,6 +23,7 @@ import { Link } from "react-router-dom";
 import classes from "./Navbar.module.css";
 
 import { styled } from "@mui/system";
+import { useSelector } from "react-redux";
 
 const StyledBadge = styled(Badge)({
   "& .MuiBadge-dot": {
@@ -31,6 +32,8 @@ const StyledBadge = styled(Badge)({
 });
 
 export default function Navbar() {
+  const userToken = useSelector((state) => state.user.userToken);
+
   const [mobMenuIcon, setmobMenuIcon] = useState(false);
   const menu = useRef();
   const closeOpenMenu = function () {
@@ -45,6 +48,7 @@ export default function Navbar() {
       : (menu.current.style.left = "-100%");
   };
 
+
   return (
     <>
       <Grid>
@@ -56,6 +60,7 @@ export default function Navbar() {
               item
               sx={{
                 display: { xs: "none", md: "flex" },
+                visibility:"hidden",
                 justifyContent: "space-between",
                 alignItems: "center",
                 alignContent: "stretch",
@@ -108,7 +113,7 @@ export default function Navbar() {
                 flexWrap: "nowrap",
               }}
             >
-              <Link to="/search">
+              {/* <Link to="/search">
                 <Grid
                   container
                   item
@@ -126,7 +131,7 @@ export default function Navbar() {
                 >
                   <SearchOutlinedIcon />
                 </Grid>
-              </Link>
+              </Link> */}
               <Link to="/Profile">
                 <Grid
                   container

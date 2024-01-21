@@ -19,22 +19,13 @@ export const userAuth = createAsyncThunk("users/get", async (user, { rejectWithV
     if (response.success) {
         let userData = { "email": response.email, "userName": response.name, "userId": response.user_id }
         localStorage.setItem("userToken", response.token);
-        // let userCart = await axios.get(`${baseUrl}/getCartUser`, {
-        //     headers: {
-        //         authorization: `Bearer ${response.userToken}`
-        //     }
+        console.log(" successss ")
+        // let userCart = await axios.post(`${baseUrl}/viewcart.php`, {
+        //     "user_id": +response.user_id,
+        //     "token": response.token
         // });
-        // if (userCart.data.message === "Cart data") {
-        //     console.log("first")
-        // } else {
-        //     userCart = await axios.post(`${baseUrl}/Cart`, {}, {
-        //         headers: {
-        //             authorization: `Bearer ${response.userToken}`
-        //         }
-        //     });
-        // }
-        return { userData, userToken: response.token };
-        // return { userData, userToken: response.userToken, userCart: userCart.data.Cart };
+        // console.log("userCart", userCart)
+        return { userData, userToken: response.token, userCart: [] };
     } else {
         return rejectWithValue(response);
     }
@@ -50,7 +41,6 @@ export const userSlice = createSlice({
             state.userToken = null
             state.user = null
             state.userCart = null
-
         },
         emptyUserCart: (state) => {
             state.userCart = null

@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+}
+.wrapper{
+   
+    
+    /* height: 2.5rem; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:white;
+    border: #1a1a1a 1px solid;
+}
+
+
+/* .wrapper span{
+    width: 100%;
+    text-align: center;
+    font-size: 5px;
+    color:"#121212"
+} */
+
+
+button {
+    width: 20px !important;
+    max-width: 20px !important;
+}
+
+.addToCart
+{
+    border: #1a1a1a 1px solid;
+    cursor: pointer;
+    text-align: center;
+    padding: 1rem 1rem;
+  
+    
+
+}
+
+
+.addToCart:hover{
+    /* border: #1a1a1a 2px solid ; */
+    /* scale: (1); */
+    /* background-color: red; */
+    
+
+}
+
+

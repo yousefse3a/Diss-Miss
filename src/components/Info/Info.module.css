@@ -1,0 +1,66 @@
+.colorOption{
+
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    margin-right: .5rem;    
+    background-color:"#1a1a1a"
+}
+
+.active{   
+    width: 1.5rem;
+    height: 1.5rem;
+    opacity: 1;      
+    transition: all 0.3s;
+    position: relative;
+    
+}
+.active::after{
+    content: "";
+    position: absolute;
+    bottom: -0.3rem;
+    left: 0;
+    right: 0;    
+    border-top: 2px solid #1a1a1a;
+    z-index: 98;
+    
+}
+.wrapper{
+   
+    
+    height: 2.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background:white;
+    border: #1a1a1a 1px solid;
+}
+
+
+.wrapper span{
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color:"#121212"
+}
+
+.addToCart
+{
+    border: #1a1a1a 1px solid;
+    cursor: pointer;
+    text-align: center;
+    padding: 1rem;
+  
+    
+
+}
+
+
+.addToCart:hover{
+    border: black 2px solid ;
+    scale: (1);
+    /* background-color: red; */
+    
+
+}

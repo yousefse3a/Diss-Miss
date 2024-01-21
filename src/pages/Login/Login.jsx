@@ -30,7 +30,7 @@ export default function Login() {
         marginY: "1rem",
       }}
     >
-      <Typography variant="h4" sx={{ margin: "1rem" }}>
+      <Typography variant="h4" sx={{ margin: "1rem", fontFamily: "inherit" }}>
         Login
       </Typography>
       <TextField sx={{ m: 1, width: "25rem" }} label="email" id="email" />

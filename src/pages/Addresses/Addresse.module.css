@@ -1,0 +1,18 @@
+.addToCart {
+    border: #1a1a1a 1px solid;
+    cursor: pointer;
+    text-align: center;
+
+
+
+
+}
+
+
+.addToCart:hover {
+    border: #1a1a1a 2px solid;
+
+    /* background-color: red; */
+
+
+}

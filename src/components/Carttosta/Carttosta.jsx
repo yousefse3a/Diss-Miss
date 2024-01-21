@@ -82,7 +82,7 @@ export default function Carttosta() {
         <Link to={"/Cart"}>
           <Grid
             sx={{
-              background: "black",
+              background: "#1a1a1a",
               color: "white",
               display: "flex",
               justifyContent: "center",
@@ -95,7 +95,7 @@ export default function Carttosta() {
         <Link to={"/Checkout"}>
           <Grid
             sx={{
-              background: "black",
+              background: "#1a1a1a",
               color: "white",
               display: "flex",
               justifyContent: "center",

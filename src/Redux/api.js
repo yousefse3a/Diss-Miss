@@ -1,12 +1,11 @@
 import axios from "axios";
-// export const baseUrl = 'http://localhost:4000'
-export const baseUrl = 'https://ecommercev0.onrender.com'
+export const baseUrl = 'https://kawadermedical.com/dissmiss'
 
 export const Login = async (user) => {
     const { data } = await axios.post(
-        `${baseUrl}/signin`,
+        `${baseUrl}/login.php`,
         {
-            email: user.email,
+            identifier: user.email,
             password: user.pass
         }
     );

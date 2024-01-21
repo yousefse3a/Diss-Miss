@@ -14,13 +14,21 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DensityMediumOutlinedIcon from "@mui/icons-material/DensityMediumOutlined";
-import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined";
 import React, { useEffect, useRef, useState } from "react";
 import logo from "../../assets/Diss & Miss.png";
 import { Link } from "react-router-dom";
 import classes from "./Navbar.module.css";
+
+import { styled } from "@mui/system";
+
+const StyledBadge = styled(Badge)({
+  "& .MuiBadge-dot": {
+    backgroundColor: "#c6565a", // Set your desired color here
+  },
+});
 
 export default function Navbar() {
   const [mobMenuIcon, setmobMenuIcon] = useState(false);
@@ -51,7 +59,7 @@ export default function Navbar() {
                 justifyContent: "space-between",
                 alignItems: "center",
                 alignContent: "stretch",
-                color: "gray",
+                color: "#666",
               }}
             >
               <SearchOutlinedIcon />
@@ -74,7 +82,7 @@ export default function Navbar() {
                 justifyContent: "space-between",
                 alignItems: "center",
                 alignContent: "stretch",
-                color: "gray",
+                color: "#666",
                 cursor: "pointer",
               }}
               onClick={() => {
@@ -109,9 +117,9 @@ export default function Navbar() {
                     display: { xs: "flex", md: "none" },
                     justifyContent: "center",
                     padding: ".5rem 1rem",
-                    color: "gray",
+                    color: "#666",
                     "&:hover": {
-                      background: "gray",
+                      background: "#666",
                       color: "#bbb",
                     },
                   }}
@@ -128,10 +136,12 @@ export default function Navbar() {
                     display: { xs: "none", md: "flex" },
                     justifyContent: "center",
                     padding: ".5rem 1rem",
-                    color: "gray",
+
+                    color: "#666",
                     "&:hover": {
-                      background: "gray",
+                      background: "#666",
                       color: "#bbb",
+                      borderRadius: "20%",
                     },
                   }}
                 >
@@ -148,15 +158,24 @@ export default function Navbar() {
                     justifyContent: "center",
                     padding: ".5rem 1rem",
 
-                    color: "gray",
+                    color: "#666",
                     "&:hover": {
-                      background: "gray",
+                      background: "#666",
                       color: "#bbb",
+                      borderRadius: "20%",
                     },
                   }}
                 >
-                  <Badge badgeContent={4} color="secondary">
-                    <ShoppingBagOutlinedIcon color="action" />
+                  <Badge
+                    badgeContent={45}
+                    sx={{
+                      ".MuiBadge-badge": {
+                        backgroundColor: "#c6565a",
+                      },
+                    }}
+                    color="error"
+                  >
+                    <ShoppingBagOutlinedIcon />
                   </Badge>
                 </Grid>
               </Link>
@@ -199,7 +218,7 @@ export default function Navbar() {
           background: "rgba(255,255,255,.2)",
           width: "100vw",
           height: `calc(100vh - 107px)`,
-          zIndex: "100",
+          zIndex: "10000",
           position: "absolute",
           left: "-100%",
           transition: ".5s linear",
@@ -211,6 +230,7 @@ export default function Navbar() {
       >
         <Grid
           sx={{
+            zIndex:"101",
             width: "80%",
             height: "100%",
             background: "white",
@@ -225,6 +245,7 @@ export default function Navbar() {
           <Grid
             sx={{
               display: "flex",
+              zIndex:"101",
               flexDirection: "column",
               justifyContent: "start",
               "& > a": {
@@ -244,7 +265,7 @@ export default function Navbar() {
             }}
           >
             <Link to={"/"}>
-              <Box
+              <Box 
                 onClick={() => {
                   closeOpenMenu();
                 }}
@@ -273,7 +294,7 @@ export default function Navbar() {
           </Grid>
           <Grid
             sx={{
-              background: "rgba(0,0,0,.5)",
+              background: "#738964",
               boxSizing: "border-box",
               padding: "1rem",
               "&>div": {

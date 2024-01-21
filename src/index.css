@@ -1,29 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Assistant&display=swap");
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Assistant", sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  /* color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
+  color: #1a1a1a;
+  background-color: #f0f0f0;
 }
 
 body {
   margin: 0;
-  /* margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh; */
 }
 a {
   text-decoration: none;
 }
 a:visited {
   color: inherit;
+}
+.MuiOutlinedInput-notchedOutline
+{
+ border-color: #666 !important; 
+}
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+  color:#666 !important ;
+  border-color: #666 !important;
 }

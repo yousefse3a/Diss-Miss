@@ -10,6 +10,10 @@ import NotFound from "./NotFound/NotFound";
 import Bestseller from "./Bestseller/Bestseller";
 import Products from "./Products/Products";
 import Carttosta from "../components/Carttosta/Carttosta";
+import SingleProduct from "../components/Product/SingleProduct";
+import Cart from "./Cart/Cart";
+import Profile from "./Profiles/Profile";
+import Addresse from "./Addresses/Addresse";
 // const LazyHome = React.lazy(() => import("./Home/Home"));
 
 export default function routers() {
@@ -24,7 +28,18 @@ export default function routers() {
         },
         { path: "/t", element: <Carttosta /> },
         { path: "/Bestseller", element: <Bestseller /> },
-        { path: "/AllProducts", element: <Products /> },
+
+        { path: "/cart", element: <Cart /> },
+        {
+          path: "/AllProducts", element: <Products />, children: [
+            { path: "/AllProducts/:id", element: <SingleProduct /> },
+          ]
+        },
+        {
+          path: "/Profile", element: <Profile />,
+
+        },
+        { path: "/addresses", element: <Addresse /> },
         { path: "/checkout", element: <Checkout /> },
         { path: "/Login", element: <Login /> },
         { path: "/Register", element: <Register /> },

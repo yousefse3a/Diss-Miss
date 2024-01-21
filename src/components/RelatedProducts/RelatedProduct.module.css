@@ -1,0 +1,18 @@
+.imageWrapper {
+    position: relative;
+    overflow: hidden;
+   
+}
+
+/* .imageHover {
+    position: absolute;
+    top: 0;
+    left: 0; 
+    opacity: 0;
+    transition: all 0.3s ease-out;
+   
+} */
+
+.imageHover:hover {
+    opacity: 1;
+}

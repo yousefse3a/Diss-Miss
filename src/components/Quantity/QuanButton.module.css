@@ -1,0 +1,13 @@
+*{
+    box-sizing: border-box;
+}
+.wrapper{
+   
+    
+    /* height: 2.5rem; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:white;
+    border: black 1px solid;
+}

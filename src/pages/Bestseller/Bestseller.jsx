@@ -10,7 +10,91 @@ import {
 } from "@mui/material";
 import React from "react";
 import Product from "../../components/Product/Product";
+import imageA from "../../assets/image1.webp";
+import imageB from "../../assets/image2.webp";
+import image5 from "../../assets/Image5.webp";
+import image6 from "../../assets/Image6.webp";
+import imageC from "../../assets/image3.webp";
+import imageD from "../../assets/iamge4.webp";
+import aruroa1 from "../../assets/Aurora1.webp";
+import aruroa2 from "../../assets/Aurora2.webp";
+import RelatedProduct from "../../components/RelatedProducts/RelatedProduct";
+import {relatedProducts} from "../../Data/data"
 
+// const relatedProducts = [
+//   {
+//     imgSrc1: image5,
+//     imgSrc2: image6,
+//     title: "Backpack & cross",
+//     price: "855",
+//     onSale: true,
+//     priceBeforeSale: "980",
+//   },
+//   {
+//     imgSrc1: aruroa1,
+//     imgSrc2: aruroa2,
+//     title: "Aurora",
+//     price: "1,040.00",
+//   },
+//   {
+//     imgSrc1: aruroa1,
+//     imgSrc2: aruroa2,
+//     title: "Aurora",
+//     price: "1,040.00",
+//   },
+//   {
+//     imgSrc1: aruroa1,
+//     imgSrc2: aruroa2,
+//     title: "Aurora",
+//     price: "1,040.00",
+//   },
+//   {
+//     imgSrc1: aruroa1,
+//     imgSrc2: aruroa2,
+//     title: "Aurora",
+//     price: "1,040.00",
+//   },
+//   {
+//     imgSrc1: aruroa1,
+//     imgSrc2: aruroa2,
+//     title: "Aurora",
+//     price: "1,040.00",
+//   },
+//   {
+//     imgSrc1: aruroa1,
+//     imgSrc2: aruroa2,
+//     title: "Aurora",
+//     price: "1,040.00",
+//   },
+//   {
+//     imgSrc1: aruroa1,
+//     imgSrc2: aruroa2,
+//     title: "Aurora",
+//     price: "1,040.00",
+//   },
+//   {
+//     imgSrc1: aruroa1,
+//     imgSrc2: aruroa2,
+//     title: "Aurora",
+//     price: "1,040.00",
+//   },
+//   {
+//     imgSrc1: imageA,
+//     imgSrc2: imageB,
+//     title: "Test 33",
+//     price: "200",
+//     onSale: true,
+//     priceBeforeSale: "980",
+//   },
+//   {
+//     imgSrc1: imageD,
+//     imgSrc2: imageC,
+//     title: "Samka",
+//     price: "650",
+//     onSale: true,
+//     priceBeforeSale: "1900",
+//   },
+// ];
 export default function Bestseller() {
   const [color, setcolor] = React.useState("");
   const [sort, setsort] = React.useState("");
@@ -83,7 +167,7 @@ export default function Bestseller() {
           </Grid>
         </Grid>
       </Grid>
-      <Grid
+      {/* <Grid
         container
         item
         sx={{
@@ -103,6 +187,18 @@ export default function Bestseller() {
         <Product />
         <Product />
         <Product />
+      </Grid> */}
+
+      <Grid item xs={12} md={12} sx={{ mt: "2rem", mb: "2rem" }}>
+        <Grid container rowGap={1}>
+          {relatedProducts.map((item, i) => {
+            return (
+              // <Link to="/SingleProduct">
+              <RelatedProduct key={i} item={item} />
+              // </Link>
+            );
+          })}
+        </Grid>
       </Grid>
     </Container>
   );

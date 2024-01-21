@@ -29,3 +29,8 @@
     display: flex;
     transition: all 0.25s linear;
   }
+
+  .customBadge {
+    background-color: "#00AFD7";
+    color: "white"
+  }

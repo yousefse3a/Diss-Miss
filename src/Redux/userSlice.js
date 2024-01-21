@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Login, baseUrl } from "./api";
 // import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { build } from "joi";
 
 const initialState = {
     userToken: null,
@@ -14,10 +15,9 @@ const initialState = {
 export const userAuth = createAsyncThunk("users/get", async (user, { rejectWithValue }) => {
     let response = await Login(user);
     console.log("from redux", response)
-    // const userData = (response.userToken);
-    // const userData = jwt_decode(response.userToken);
+
     if (response.success) {
-        let userData = { "email": response.email, "userName": response.name, "userId": response.user_id, "userToken": response.token }
+        let userData = { "email": response.email, "userName": response.name, "userId": response.user_id }
         localStorage.setItem("userToken", response.token);
         // let userCart = await axios.get(`${baseUrl}/getCartUser`, {
         //     headers: {
@@ -56,27 +56,29 @@ export const userSlice = createSlice({
             state.userCart = null
         }
     },
-    // extraReducers: {
-    //     [userAuth.pending]: (state) => {
-    //         state.loading = true;
-    //         state.error = null
-    //     },
-    //     [userAuth.fulfilled]: (state, action) => {
-    //         state.loading = false;
-    //         state.user = action.payload.userData
-    //         state.userToken = action.payload.userToken;
-    //         state.userCart = action.payload.userCart;
-    //         state.error = null
+    extraReducers: (builder) => {
+        builder.addCase(userAuth.pending, (state, action) => {
+            state.loading = true;
+            state.error = null
+        })
+            .addCase(userAuth.fulfilled, (state, action) => {
+                console.log("full action.payload", action.payload)
+                state.loading = false;
+                state.user = action.payload.userData
+                state.userToken = action.payload.userToken;
+                state.userCart = action.payload.userCart;
+                state.error = null
+            })
+            .addCase(userAuth.rejected, (state, action) => {
+                console.log("reg action.payload", action.payload)
+                state.loading = false;
+                state.error = (action.payload) ? action.payload.message : "pass or email not correct";
+                state.user = null;
+                state.userToken = null;
+                state.userCart = null
+            })
+    }
 
-    //     },
-    //     [userAuth.rejected]: (state, action) => {
-    //         state.loading = false;
-    //         state.error = (action.payload) ? action.payload.message : "pass or email not correct";
-    //         state.user = null;
-    //         state.userToken = null;
-    //         state.userCart = null
-    //     }
-    // }
 })
 
 export const { Logout, emptyUserCart } = userSlice.actions;

@@ -7,17 +7,11 @@ import classess from "./RelatedProduct.module.css";
 import { Link } from "react-router-dom";
 import placeHolder from "../../assets/placeholder.webp";
 const imageUrls = [imageB, imageA];
-export default function RelatedProduct({
-  imgSrc1,
-  imgSrc2,
-  title,
-  price,
-  onSale,
-  priceBeforeSale,
-  item,
-}) {
+export default function RelatedProduct({ productDetails }) {
   //   const [onSale, setOnSale] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
+  console.log("related",productDetails)
+  
   return (
     <>
       <Grid
@@ -28,16 +22,17 @@ export default function RelatedProduct({
         sx={{ padding: ".5rem" }}
         className={classess.imageWrapper}
         onClick={() => {
-          console.log(item);
+          console.log(productDetails);
         }}
       >
-        <Link to={`/AllProducts/${item.product_id}`}>
+        <Link to={`/Product/${productDetails.bigid}`}>
           <img
-            // src={isHovered ? item.imgList[0] : item.imgList[1]}
+            // src={isHovered ? productDetails.imgList[0] : productDetails.imgList[1]}
             src={
-              item.image == "no" || item.image == "http://example.com/image.jpg"
+              productDetails.image == "no" ||
+              productDetails.image == "http://example.com/image.jpg"
                 ? placeHolder
-                : item.image
+                : productDetails.image
             }
             width="100%"
             className={classess.imageHover}
@@ -54,8 +49,8 @@ export default function RelatedProduct({
               },
             }}
           >
-            {/* {item.title} */}
-            {item.name}
+            {/* {productDetails.title} */}
+            {productDetails.name}
           </Box>
         </Link>
 
@@ -77,20 +72,20 @@ export default function RelatedProduct({
         </Box> */}
 
         {/* <Grid container>
-          {item.onSale ? (
+          {productDetails.onSale ? (
             <>
               <Box sx={{ textDecoration: "line-through", mr: "1rem" }}>
-                LE {item.priceBeforeSale} EGP
+                LE {productDetails.priceBeforeSale} EGP
               </Box>
-              <Box>LE {item.price} EGP</Box>
+              <Box>LE {productDetails.price} EGP</Box>
             </>
           ) : (
-            <Box>LE {item.price} EGP</Box>
+            <Box>LE {productDetails.price} EGP</Box>
           )}
         </Grid> */}
 
         <Grid container>
-          <Box>LE {item.price} EGP</Box>
+          <Box>LE {productDetails.price} EGP</Box>
         </Grid>
       </Grid>
     </>

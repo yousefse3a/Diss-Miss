@@ -216,7 +216,7 @@ key={index}
               {allProduct.map((item, i) => {
                 return (
                   // <Link to="/SingleProduct">
-                  <RelatedProduct key={i} item={item} />
+                  <RelatedProduct key={i} productDetails={item} />
                   // </Link>
                 );
               })}

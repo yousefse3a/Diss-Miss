@@ -1,17 +1,8 @@
-import {
-  Grid,
-  Box,
-  Paper,
-  Container,
-  Button,
-  Typography,
-  TextField,
-} from "@mui/material";
+import { Grid, Box, Paper, Container } from "@mui/material";
 import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import imageA from "../../assets/image1.webp";
 import classess from "./Cart.module.css";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import QuanButton from "../../components/Quantity/QuanButton";
 import CartEmpty from "./CartEmpty";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Cart() {
-const userToken = useSelector((state) => state.user.userToken);
+  const userToken = useSelector((state) => state.user.userToken);
   const [quantity, setQuantity] = useState(1);
   const [finalPrice, setFinalPrice] = useState(1);
   const [price, setPrice] = useState(1040);
@@ -217,10 +208,10 @@ const userToken = useSelector((state) => state.user.userToken);
                   }}
                   className={classess.addToCart}
                   onClick={() => {
-                    navigate("/checkout");
+                    userToken ? navigate("/checkout") : navigate("/login");
                   }}
                 >
-                  Check Out
+                  {userToken ? "Check Out" : "Login To checkout"}
                 </Box>
               </Grid>
             </Grid>

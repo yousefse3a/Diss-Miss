@@ -24,80 +24,7 @@ import { relatedProducts } from "../../Data/data";
 import { getEntity } from "../../API/getAPIs";
 import { useLocation } from "react-router-dom";
 
-// const relatedProducts = [
-//   {
-//     imgSrc1: image5,
-//     imgSrc2: image6,
-//     title: "Backpack & cross",
-//     price: "855",
-//     onSale: true,
-//     priceBeforeSale: "980",
-//   },
-//   {
-//     imgSrc1: aruroa1,
-//     imgSrc2: aruroa2,
-//     title: "Aurora",
-//     price: "1,040.00",
-//   },
-//   {
-//     imgSrc1: aruroa1,
-//     imgSrc2: aruroa2,
-//     title: "Aurora",
-//     price: "1,040.00",
-//   },
-//   {
-//     imgSrc1: aruroa1,
-//     imgSrc2: aruroa2,
-//     title: "Aurora",
-//     price: "1,040.00",
-//   },
-//   {
-//     imgSrc1: aruroa1,
-//     imgSrc2: aruroa2,
-//     title: "Aurora",
-//     price: "1,040.00",
-//   },
-//   {
-//     imgSrc1: aruroa1,
-//     imgSrc2: aruroa2,
-//     title: "Aurora",
-//     price: "1,040.00",
-//   },
-//   {
-//     imgSrc1: aruroa1,
-//     imgSrc2: aruroa2,
-//     title: "Aurora",
-//     price: "1,040.00",
-//   },
-//   {
-//     imgSrc1: aruroa1,
-//     imgSrc2: aruroa2,
-//     title: "Aurora",
-//     price: "1,040.00",
-//   },
-//   {
-//     imgSrc1: aruroa1,
-//     imgSrc2: aruroa2,
-//     title: "Aurora",
-//     price: "1,040.00",
-//   },
-//   {
-//     imgSrc1: imageA,
-//     imgSrc2: imageB,
-//     title: "Test 33",
-//     price: "200",
-//     onSale: true,
-//     priceBeforeSale: "980",
-//   },
-//   {
-//     imgSrc1: imageD,
-//     imgSrc2: imageC,
-//     title: "Samka",
-//     price: "650",
-//     onSale: true,
-//     priceBeforeSale: "1900",
-//   },
-// ];
+
 export default function Bestseller() {
   const location = useLocation();
   const current = location.pathname.split("/").slice(-1)[0].toLocaleLowerCase();
@@ -181,27 +108,8 @@ export default function Bestseller() {
           </Grid>
         </Grid>
       </Grid>
-      {/* <Grid
-        container
-        item
-        sx={{
-          marginY: "2rem",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          flexWrap: "wrap",
-        }}
-      >
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-        <Product />
-      </Grid> */}
+      
+       
 
       {loading ? (
         <Container>
@@ -223,7 +131,7 @@ export default function Bestseller() {
               {allProduct.map((item, i) => {
                 return (
                   // <Link to="/SingleProduct">
-                  <RelatedProduct key={i} item={item} />
+                  <RelatedProduct key={i} productDetails={item} />
                   // </Link>
                 );
               })}

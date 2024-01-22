@@ -1,10 +1,10 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
-Button,
+  Button,
   CircularProgress,
   FormControl,
-FormHelperText,
+  FormHelperText,
   Grid,
   IconButton,
   InputAdornment,
@@ -86,7 +86,7 @@ export default function Register() {
   };
   return (
     <Grid
-container
+      container
       sx={{
         display: "flex",
         flexDirection: "row",
@@ -95,11 +95,11 @@ container
         flexWrap: "wrap",
         width: { xs: "100%", md: "50%" },
       }}
-component={"form"}
+      component={"form"}
       noValidate
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Typography variant="h4" sx={{ margin: "1rem", fontFamily: "inherit" }}>
+      <Typography variant="h4"  >
         Create account
       </Typography>
       <FormInput
@@ -131,27 +131,27 @@ component={"form"}
       />
       <Grid item xs={10} md={8} paddingX={1} paddingY={".2rem"}>
         <FormControl variant="outlined" fullWidth size="small">
-        <InputLabel htmlFor="outlined-adornment-password">
+          <InputLabel htmlFor="outlined-adornment-password">
             Password
           </InputLabel>
-        <OutlinedInput
-          id="outlined-adornment-password"
-          type={showPassword ? "text" : "password"}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-          label="Password"
-        {...register("Password")}
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? "text" : "password"}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+            {...register("Password")}
           />
-<FormHelperText
+          <FormHelperText
             sx={{
               color: "#fff !important",
               bgcolor: `${errors.Password ? "#e65257" : "transparent"}`,
@@ -164,8 +164,8 @@ component={"form"}
           >
             {errors.Password ? errors.Password.message : " "}
           </FormHelperText>
-      </FormControl>
-</Grid>
+        </FormControl>
+      </Grid>
 
       <DevTool control={control} />
       <Grid
@@ -174,7 +174,7 @@ component={"form"}
         xs={8}
         md={8}
         sx={{
-display: "felx",
+          display: "felx",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
@@ -187,46 +187,46 @@ display: "felx",
           component={Button}
           sx={{
             display: "flex",
-          margin: "1.5rem  0 .5rem 0",
-          padding: ".5rem 3rem",
-          boxSizing: "border-box",
-          background: "#40a0df",
-          color: "#fff",
-          borderRadius: "5px",
-          border: "1px #40a0df solid",
-          transition: ".5s",
-          "&:hover": {
-            color: "#40a0df",
-            background: "#fff",
-          },
-        }}
-      >
-        {isLoading ? (
+            margin: "1.5rem  0 .5rem 0",
+            padding: ".5rem 3rem",
+            boxSizing: "border-box",
+            background: "#40a0df",
+            color: "#fff",
+            borderRadius: "5px",
+            border: "1px #40a0df solid",
+            transition: ".5s",
+            "&:hover": {
+              color: "#40a0df",
+              background: "#fff",
+            },
+          }}
+        >
+          {isLoading ? (
             <Box sx={{ display: "flex" }}>
               <CircularProgress size={"1.5rem"} sx={{ color: "wheat" }} />
-      </Box>
-) : (
+            </Box>
+          ) : (
             "Create"
           )}
         </Grid>
-      <Link to="/Login">
+        <Link to="/Login">
           <Box
-        sx={{
-          margin: ".5rem 0 .7rem 0",
+            sx={{
+              margin: ".5rem 0 .7rem 0",
               padding: ".5rem 1.7rem",
-          boxSizing: "border-box",
+              boxSizing: "border-box",
               borderRadius: "5px",
               transition: ".5s",
-          "&:hover": {
-            background: "#40a0df",
+              "&:hover": {
+                background: "#40a0df",
                 color: "#fff",
-          },
-        }}
-      >
-        login
-</Box>
-      </Link>
-</Grid>
+              },
+            }}
+          >
+            login
+          </Box>
+        </Link>
+      </Grid>
     </Grid>
   );
 }

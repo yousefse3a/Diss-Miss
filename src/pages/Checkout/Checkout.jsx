@@ -33,7 +33,7 @@ import { DevTool } from "@hookform/devtools";
 export default function Checkout() {
   const [isLoading, setisLoading] = useState(false);
   const [country, setcountry] = useState("");
-  const [Payment, setPayment] = useState("");
+  const [Payment, setPayment] = useState(" ");
   const [collapseOpen, setcollapseOpen] = useState(false);
 
   const handleCollapse = () => {
@@ -69,8 +69,8 @@ export default function Checkout() {
         "string.pattern.base": "not right number",
       }),
     secPhone: Joi.string()
+      .optional()
       .regex(/^01[0125][0-9]{8}$/)
-      .required()
       .messages({
         "string.empty": "second phone is empty",
         "string.pattern.base": "not right number",
@@ -307,8 +307,8 @@ export default function Checkout() {
             flexDirection: "column",
             justifyContent: "space-between",
             alignItems: "center",
-            borderRadius:"2%",
-            my:"1rem"
+            borderRadius: "2%",
+            my: "1rem",
           }}
         >
           <Grid
@@ -316,7 +316,6 @@ export default function Checkout() {
               display: "flex",
               flexDirection: "column",
               width: "100%",
-             
             }}
           >
             <CardHeader
@@ -353,7 +352,7 @@ export default function Checkout() {
                     width: "100%",
                     maxHeight: "75%",
                     overflowY: "auto",
-                    py:"1rem"
+                    py: "1rem",
                   }}
                 >
                   <CheckoutItem />

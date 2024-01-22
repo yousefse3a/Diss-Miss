@@ -1,8 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import CheckIcon from "@mui/icons-material/Check";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoodIcon from "@mui/icons-material/Mood";
 import StraightenIcon from "@mui/icons-material/Straighten";
 import {
   Typography,
@@ -41,7 +39,7 @@ const products = [
   },
 ];
 
-export default function Info({ productByName, productByColor }) {
+export default function Info({ ProductDetail }) {
   // States
   const [size, setSize] = useState("");
   const [textQen, setTextQen] = useState(false);
@@ -79,28 +77,28 @@ export default function Info({ productByName, productByColor }) {
       <Grid sx={{ pl: "2rem" }} container>
         <Grid item xs={12} md={12}>
           <Typography sx={{ color: "#666", fontSize: "10px" }} gutterBottom>
-            DODICI
+            Diss Miss
           </Typography>
         </Grid>
 
         <Grid item xs={12} md={12}>
           <Typography sx={{ color: "#1a1a1a ", fontSize: "40px" }} gutterBottom>
-            {productByName.title}
+            {ProductDetail.title}
           </Typography>
         </Grid>
 
         <Grid item xs={12} md={12}>
           <Typography sx={{ color: "#1a1a1a ", fontSize: "18px" }} gutterBottom>
             <Grid container>
-              {productByName.onSale ? (
+              {ProductDetail.onSale ? (
                 <>
                   <Box sx={{ textDecoration: "line-through", mr: "1rem" }}>
-                    LE {productByName.priceBeforeSale} EGP
+                    LE {ProductDetail.priceBeforeSale} EGP
                   </Box>
-                  <Box>LE {productByName.price} EGP</Box>
+                  <Box>LE {ProductDetail.price} EGP</Box>
                 </>
               ) : (
-                <Box>LE {productByName.price} EGP</Box>
+                <Box>LE {ProductDetail.price} EGP</Box>
               )}
             </Grid>
           </Typography>
@@ -139,26 +137,10 @@ export default function Info({ productByName, productByColor }) {
           ></Typography>
           <Grid container justifyContent="flex-start" sx={{ mb: "1.2rem" }}>
             Colors :
-            {/* {products.map((color, i) => {
-              return (
-                <Box
-                  key={i}
-                  className={`${classess.colorOption} ${color.color == selectedColor ? classess.active : ""
-                    }`}
-                  sx={{ bgcolor: color.color, ml: "0.3rem" }}
-                  onClick={() => {
-                    handleColorChange(color.color);
-                  }}
-                >
-             
-                </Box>
-              );
-            })} */}
-           
-            <ColorOption
+            {/* <ColorOption
               dataObject={productByColor}
               setSelectedSize={setSelectedSize}
-            />
+            /> */}
             <Grid container justifyContent="flex-start">
               <FormControl sx={{ width: "9rem", mt: "1.5rem" }}>
                 <InputLabel id="demo-simple-select-label">Size</InputLabel>
@@ -270,7 +252,7 @@ export default function Info({ productByName, productByColor }) {
             Add to cart
           </Box>
           <CardPop
-            product={productByName}
+            product={ProductDetail}
             handleClose={handleClose}
             open={open}
             quantity={quantity}
@@ -302,7 +284,7 @@ export default function Info({ productByName, productByColor }) {
           md={12}
           sx={{ mt: "20px", color: "#1a1a1a", mb: "1.5rem" }}
         >
-          {productByName.description}
+          {ProductDetail.description}
         </Grid>
 
         <Grid item xs={12} md={12} sx={{ mt: "20px" }}>
@@ -324,7 +306,7 @@ export default function Info({ productByName, productByColor }) {
             </AccordionSummary>
             <AccordionDetails>
               <Typography sx={{ color: "#1a1a1a" }}>
-                {productByName.size}
+                {ProductDetail.size}
               </Typography>
             </AccordionDetails>
           </Accordion>

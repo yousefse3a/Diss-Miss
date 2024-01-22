@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 // const LazyHome = React.lazy(() => import("./Home/Home"));
 
 export default function Routers() {
-const userToken = useSelector((state) => state.user.userToken);
+  const userToken = useSelector((state) => state.user.userToken);
 
   const routers = createBrowserRouter([
     {
@@ -36,7 +36,10 @@ const userToken = useSelector((state) => state.user.userToken);
         {
           path: "/AllProducts",
           element: <Products />,
-          children: [{ path: "/AllProducts/:id", element: <SingleProduct /> }],
+        },
+        {
+          path: "/Product/:productID",
+          element: <SingleProduct />,
         },
         {
           path: "/Profile",
@@ -50,11 +53,18 @@ const userToken = useSelector((state) => state.user.userToken);
         { path: "/checkout", element: <Checkout /> },
         {
           path: "/Login",
-          element: <> {userToken ? <Home /> : <Login />}</>,
+          element: (
+            <> {userToken ? <Navigate to={"/"} replace={true} /> : <Login />}</>
+          ),
         },
         {
           path: "/Register",
-          element: <> {userToken ? <Home /> : <Register />}</>,
+          element: (
+            <>
+              {" "}
+              {userToken ? <Navigate to={"/"} replace={true} /> : <Register />}
+            </>
+          ),
         },
         { path: "*", element: <NotFound /> },
       ],
@@ -71,10 +81,10 @@ export function ProtectedRoute({ children }) {
   console.log("userrrr", location.pathname);
   if (userToken) {
     if (["/Register", "/Login"].includes(location.pathname)) {
-      return <Navigate to={"/"} replace />;
+      return <Navigate to={"/"} replace={true} />;
     }
     return children;
   } else {
-    return <Navigate to={"/Login"} replace />;
+    return <Navigate to={"/Login"} replace={true} />;
   }
 }

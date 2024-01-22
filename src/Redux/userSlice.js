@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Login, baseUrl } from "./api";
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { build } from "joi";
 
@@ -53,21 +53,21 @@ export const userSlice = createSlice({
             state.error = null
         })
             .addCase(userAuth.fulfilled, (state, action) => {
-console.log("full action.payload", action.payload)
-            state.loading = false;
-            state.user = action.payload.userData
-            state.userToken = action.payload.userToken;
-            state.userCart = action.payload.userCart;
-            state.error = null
-})
+                console.log("full action.payload", action.payload)
+                state.loading = false;
+                state.user = action.payload.userData
+                state.userToken = action.payload.userToken;
+                state.userCart = action.payload.userCart;
+                state.error = null
+            })
             .addCase(userAuth.rejected, (state, action) => {
-console.log("reg action.payload", action.payload)
-            state.loading = false;
-            state.error = (action.payload) ? action.payload.message : "pass or email not correct";
-            state.user = null;
-            state.userToken = null;
-            state.userCart = null
-        })
+                console.log("reg action.payload", action.payload)
+                state.loading = false;
+                state.error = (action.payload) ? action.payload.message : "pass or email not correct";
+                state.user = null;
+                state.userToken = null;
+                state.userCart = null
+            })
     }
 })
 

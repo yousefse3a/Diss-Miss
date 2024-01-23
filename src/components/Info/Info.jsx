@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import StraightenIcon from "@mui/icons-material/Straighten";
@@ -15,34 +15,13 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Modal,
 } from "@mui/material";
 import classess from "./Info.module.css";
 import CardPop from "../CardPop/CardPop";
 import { useNavigate } from "react-router";
-import ColorOption from "../ColorOption/ColorOption";
-
-const sizes = ["xl", "xxl", "sm"];
-const products = [
-  {
-    name: "Bag",
-    color: "red",
-    size: ["xl", "xxl", "sm"],
-  },
-  {
-    color: "blue",
-    size: ["sm"],
-  },
-  {
-    color: "green",
-    size: ["ahmed", "Yousef"],
-  },
-];
 
 export default function Info({ ProductDetail }) {
-  // States
   const [size, setSize] = useState("");
-  const [textQen, setTextQen] = useState(false);
   const [quantity, setQuantity] = useState(0);
 
   const [selectedColor, setSelectedColor] = useState("");
@@ -60,16 +39,11 @@ export default function Info({ ProductDetail }) {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const handleColorChange = (event) => {
-    const colorValue = event;
+  const handleColorChange = (e) => {
+    const colorValue = e;
     setSelectedColor(colorValue);
-
-    const selectedProduct = products.find(
-      (product) => product.color == colorValue
-    );
-
-    setSelectedSize(selectedProduct ? selectedProduct.size : "");
-    setSize("");
+    const selectedColor = ProductDetail.colorSize[`${colorValue}`];
+    setSelectedSize(selectedColor);
   };
 
   return (
@@ -137,10 +111,31 @@ export default function Info({ ProductDetail }) {
           ></Typography>
           <Grid container justifyContent="flex-start" sx={{ mb: "1.2rem" }}>
             Colors :
-            {/* <ColorOption
-              dataObject={productByColor}
-              setSelectedSize={setSelectedSize}
-            /> */}
+            {Object.keys(ProductDetail.colorSize).map((color, index) => {
+              console.log(color);
+              return (
+                <>
+                  <Box
+                    key={index}
+                    className={`${classess.colorOption} ${
+                      color == selectedColor ? classess.active : ""
+                    }`}
+                    sx={{
+                      bgcolor: color,
+                      ml: "0.3rem",
+                      width: "1.2rem",
+                      height: " 1.2rem",
+                      borderRadius: "50%",
+                      marginRight: " .5rem",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      handleColorChange(color);
+                    }}
+                  ></Box>
+                </>
+              );
+            })}
             <Grid container justifyContent="flex-start">
               <FormControl sx={{ width: "9rem", mt: "1.5rem" }}>
                 <InputLabel id="demo-simple-select-label">Size</InputLabel>
@@ -155,8 +150,8 @@ export default function Info({ ProductDetail }) {
                 >
                   {selectedSize.map((item, i) => {
                     return (
-                      <MenuItem key={i} value={item}>
-                        {item}
+                      <MenuItem key={i} value={item.productID}>
+                        {item.size}
                       </MenuItem>
                     );
                   })}

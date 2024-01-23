@@ -8,8 +8,8 @@
 }
 
 .active{   
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
     opacity: 1;      
     transition: all 0.3s;
     position: relative;

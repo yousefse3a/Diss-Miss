@@ -27,7 +27,8 @@ export default function SingleProduct() {
 
     colors.map((color) => {
       data.productsByColor[`${color}`].products.map((i) => {
-        colorSize[color][`${i.size}`] = i.product_id;
+        // colorSize[color][`${i.size}`] = i.product_id;
+        colorSize[color].push({ size: i.size, productID: i.product_id });
       });
     });
     setcolorSize(colorSize);

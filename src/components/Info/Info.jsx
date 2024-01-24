@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import StraightenIcon from "@mui/icons-material/Straighten";
 import {
   Typography,
   Box,
@@ -19,25 +17,24 @@ import {
 import classess from "./Info.module.css";
 import CardPop from "../CardPop/CardPop";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../Redux/cartSlice";
 
 export default function Info({ ProductDetail }) {
-  const [size, setSize] = useState("");
-  const [quantity, setQuantity] = useState(0);
+  const dispatch = useDispatch();
+
+  const [quantity, setQuantity] = useState(1);
 
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState([]);
-  const navigate = useNavigate();
+  const [notSelect, setnotSelect] = useState(false);
 
-  const [expanded, setExpanded] = useState(false);
+  const [selectedItemID, setselectedItemID] = useState(null);
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  //Fuunctions
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
 
   const handleColorChange = (e) => {
     const colorValue = e;
@@ -46,22 +43,26 @@ export default function Info({ ProductDetail }) {
     setSelectedSize(selectedColor);
   };
 
+  function addToCart() {
+    dispatch(addProduct({ _id: selectedItemID, ProductDetail, Amount:quantity }));
+  }
+
   return (
     <>
-      <Grid sx={{ pl: "2rem" }} container>
-        <Grid item xs={12} md={12}>
+      <Grid container>
+        <Grid item xs={12}>
           <Typography sx={{ color: "#666", fontSize: "10px" }} gutterBottom>
             Diss Miss
           </Typography>
         </Grid>
 
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12}>
           <Typography sx={{ color: "#1a1a1a ", fontSize: "40px" }} gutterBottom>
             {ProductDetail.title}
           </Typography>
         </Grid>
 
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12}>
           <Typography sx={{ color: "#1a1a1a ", fontSize: "18px" }} gutterBottom>
             <Grid container>
               {ProductDetail.onSale ? (
@@ -77,8 +78,7 @@ export default function Info({ ProductDetail }) {
             </Grid>
           </Typography>
         </Grid>
-
-        <Grid item xs={12} md={12} sx={{}}>
+        <Grid item xs={12} sx={{}}>
           <Typography
             sx={{
               color: "#666",
@@ -90,12 +90,8 @@ export default function Info({ ProductDetail }) {
             <Box
               sx={{
                 display: "inline",
-                textDecoration: "underline",
                 cursor: "pointer",
                 mr: "3px",
-              }}
-              onClick={() => {
-                console.log("Shipping");
               }}
             >
               Shipping
@@ -142,15 +138,16 @@ export default function Info({ ProductDetail }) {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={size}
+                  value={selectedItemID}
                   label="Size"
                   onChange={(e) => {
-                    setSize(e.target.value);
+                    setnotSelect(false);
+                    setselectedItemID(e.target.value);
                   }}
                 >
                   {selectedSize.map((item, i) => {
                     return (
-                      <MenuItem key={i} value={item.productID}>
+                      <MenuItem key={i} value={`${item.productID}`}>
                         {item.size}
                       </MenuItem>
                     );
@@ -159,6 +156,14 @@ export default function Info({ ProductDetail }) {
               </FormControl>
             </Grid>
           </Grid>
+          <Box
+            sx={{
+              visibility: !notSelect ? "hidden" : "visible",
+              color: "red",
+            }}
+          >
+            please select size & color
+          </Box>
         </Grid>
 
         <Grid item xs={12} md={5} sx={{ mb: "1.5rem" }}>
@@ -173,7 +178,6 @@ export default function Info({ ProductDetail }) {
             <Box
               sx={{
                 fontSize: "1.5rem",
-                // bgcolor:"red",
                 width: "100%",
                 cursor: "pointer",
                 textAlign: "center",
@@ -235,13 +239,13 @@ export default function Info({ ProductDetail }) {
               },
             }}
             onClick={() => {
-              console.log("Request=>", {
-                color: selectedColor,
-                size: size,
-                quantity: quantity,
-              });
-              handleOpen();
-              // setIsCartPop(true);
+              selectedItemID
+                ? (function () {
+                    handleOpen();
+                    addToCart();
+                    console.log("selectedItemID", selectedItemID);
+                  })()
+                : setnotSelect(true);
             }}
           >
             Add to cart
@@ -271,40 +275,6 @@ export default function Info({ ProductDetail }) {
           >
             Buy it now
           </Box>
-        </Grid>
-
-        <Grid
-          item
-          xs={12}
-          md={12}
-          sx={{ mt: "20px", color: "#1a1a1a", mb: "1.5rem" }}
-        >
-          {ProductDetail.description}
-        </Grid>
-
-        <Grid item xs={12} md={12} sx={{ mt: "20px" }}>
-          <Accordion
-            sx={{
-              "& #panel1bh-header": {
-                border: "none",
-              },
-            }}
-            expanded={expanded === "panel2"}
-            onChange={handleChange("panel2")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel2bh-header"
-            >
-              <StraightenIcon sx={{ mr: "0.3rem" }} /> Dimensions
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography sx={{ color: "#1a1a1a" }}>
-                {ProductDetail.size}
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
         </Grid>
       </Grid>
     </>

@@ -12,7 +12,7 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addProduct: (state, action) => {
-            console.log(action.payload)
+            console.log("add products to cart",action.payload)
             let flag = 0;
             state.products.map((product) => {
 
@@ -22,11 +22,11 @@ export const cartSlice = createSlice({
                 }
             })
             if (flag) {
-                state.total += action.payload._id.price * action.payload.Amount;
+                state.total += action.payload.ProductDetail.price * action.payload.Amount;
             } else {
                 state.products.push(action.payload);
                 state.quantity++;
-                state.total += action.payload._id.price * action.payload.Amount;
+                state.total += action.payload.ProductDetail.price * action.payload.Amount;
             }
         },
         emptyCart: (state) => {

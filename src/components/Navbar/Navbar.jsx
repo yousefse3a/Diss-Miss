@@ -32,7 +32,8 @@ const StyledBadge = styled(Badge)({
 });
 
 export default function Navbar() {
-const userToken = useSelector((state) => state.user.userToken);
+  const userToken = useSelector((state) => state.user.userToken);
+  const cartQuantity = useSelector((state) => state.cart.quantity);
 
   const [mobMenuIcon, setmobMenuIcon] = useState(false);
   const menu = useRef();
@@ -59,7 +60,7 @@ const userToken = useSelector((state) => state.user.userToken);
               item
               sx={{
                 display: { xs: "none", md: "flex" },
-visibility:"hidden",
+                visibility: "hidden",
                 justifyContent: "space-between",
                 alignItems: "center",
                 alignContent: "stretch",
@@ -67,15 +68,6 @@ visibility:"hidden",
               }}
             >
               <SearchOutlinedIcon />
-              {/* <TextField
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    
-                  </InputAdornment>
-                ),
-              }}
-            /> */}
             </Grid>
             <Grid
               xs={2}
@@ -112,25 +104,6 @@ visibility:"hidden",
                 flexWrap: "nowrap",
               }}
             >
-              {/* <Link to="/search">
-                <Grid
-                  container
-                  item
-                  md={4}
-                  sx={{
-                    display: { xs: "flex", md: "none" },
-                    justifyContent: "center",
-                    padding: ".5rem 1rem",
-                    color: "#666",
-                    "&:hover": {
-                      background: "#666",
-                      color: "#bbb",
-                    },
-                  }}
-                >
-                  <SearchOutlinedIcon />
-                </Grid>
-              </Link> */}
               <Link to="/Profile">
                 <Grid
                   container
@@ -171,7 +144,7 @@ visibility:"hidden",
                   }}
                 >
                   <Badge
-                    badgeContent={45}
+                    badgeContent={+cartQuantity}
                     sx={{
                       ".MuiBadge-badge": {
                         backgroundColor: "#c6565a",
@@ -234,7 +207,7 @@ visibility:"hidden",
       >
         <Grid
           sx={{
-            zIndex:"101",
+            zIndex: "101",
             width: "80%",
             height: "100%",
             background: "white",
@@ -249,7 +222,7 @@ visibility:"hidden",
           <Grid
             sx={{
               display: "flex",
-              zIndex:"101",
+              zIndex: "101",
               flexDirection: "column",
               justifyContent: "start",
               "& > a": {
@@ -269,7 +242,7 @@ visibility:"hidden",
             }}
           >
             <Link to={"/"}>
-              <Box 
+              <Box
                 onClick={() => {
                   closeOpenMenu();
                 }}

@@ -4,16 +4,18 @@ import { useState } from "react";
 import { Box, Button, Grid, Container } from "@mui/material";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Logout } from "../../Redux/userSlice";
+import { deleteCart, updateUserCartApi } from "../../Redux/cartSlice";
 
 export default function Profile(props) {
   const navigate = useNavigate();
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const userToken = useSelector((state) => state.user.userToken);
 
-function handleLogOut() {
-    // dispatch(updateUserCartApi(userToken));
-    // dispatch(deleteCart());
+  function handleLogOut() {
+    dispatch(updateUserCartApi(userToken));
+    dispatch(deleteCart());
     dispatch(Logout());
   }
   return (

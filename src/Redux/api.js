@@ -12,11 +12,25 @@ export const Login = async (user) => {
     return data;
 };
 
-export const updateCart = async (userToken, cartId, products) => {
-    let {data} = await axios.put(`${baseUrl}/Cart/${cartId}`, { products }, {
-        headers: {
-            authorization: `Bearer ${userToken}`
-        }
+export const addToCart = async (payload) => {
+    console.log("add to cart", payload)
+    let { data } = await axios.put(`${baseUrl}/addtocart.php`, {
+        "user_id": +payload.user_id,
+        "token": payload.userToken,
+        "product_id": +payload._id,
+        "quantity": +payload.Amount
+    });
+    console.log({ data })
+}
+export const updateCart = async (payload, products) => {
+    let cart_items = products.map((product) => {
+        return { product_id: product._id, quantity: product.Amount }
+    })
+
+    let { data } = await axios.put(`${baseUrl}/updatecart.php`, {
+        "user_id": +payload.user_id,
+        "token": payload.userToken,
+        "cart_items": cart_items
     });
     console.log({ data })
 }

@@ -17,11 +17,13 @@ import {
 import classess from "./Info.module.css";
 import CardPop from "../CardPop/CardPop";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../Redux/cartSlice";
 
-export default function Info({ ProductDetail }) {
+export default function Info({ ProductDetail, setSelectedImage }) {
   const dispatch = useDispatch();
+  const userToken = useSelector((state) => state.user.userToken);
+  const user_id = useSelector((state) => state.user.user.userId);
 
   const [quantity, setQuantity] = useState(1);
 
@@ -41,10 +43,25 @@ export default function Info({ ProductDetail }) {
     setSelectedColor(colorValue);
     const selectedColor = ProductDetail.colorSize[`${colorValue}`];
     setSelectedSize(selectedColor);
+    setSelectedImage(selectedColor[0].productImg);
   };
 
   function addToCart() {
-    dispatch(addProduct({ _id: selectedItemID, ProductDetail, Amount:quantity }));
+    userToken
+      ? (function () {
+          dispatch(
+            addProduct({
+              _id: selectedItemID,
+              ProductDetail,
+              Amount: quantity,
+              userToken,
+              user_id,
+            })
+          );
+
+          handleOpen();
+        })()
+      : alert("pmust login");
   }
 
   return (
@@ -144,6 +161,7 @@ export default function Info({ ProductDetail }) {
                     setnotSelect(false);
                     setselectedItemID(e.target.value);
                   }}
+                  disabled={!selectedColor ? true : false}
                 >
                   {selectedSize.map((item, i) => {
                     return (
@@ -241,9 +259,7 @@ export default function Info({ ProductDetail }) {
             onClick={() => {
               selectedItemID
                 ? (function () {
-                    handleOpen();
                     addToCart();
-                    console.log("selectedItemID", selectedItemID);
                   })()
                 : setnotSelect(true);
             }}

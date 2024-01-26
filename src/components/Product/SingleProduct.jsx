@@ -13,6 +13,7 @@ export default function SingleProduct() {
   let { productID } = useParams();
   const [colorSize, setcolorSize] = useState({});
   const [ProductDetail, setProductDetail] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const getProductData = async () => {
     let { data } = await axios.get(
@@ -25,19 +26,25 @@ export default function SingleProduct() {
     });
     colors.map((color) => {
       data.productsByColor[`${color}`].products.map((i) => {
-        colorSize[color].push({ size: i.size, productID: i.product_id });
+        colorSize[color].push({
+          size: i.size,
+          productID: i.product_id,
+          productImg: i.media_url,
+          stock: i.stock,
+        });
       });
     });
     setcolorSize(colorSize);
     setProductDetail({ ...data.productsByCodeOrBigid[2], colorSize });
+    setSelectedImage(data.productsByCodeOrBigid[2].media_url)
   };
   useEffect(() => {
     getProductData();
   }, []);
 
   useEffect(() => {
-    console.log(colorSize);
-  }, [colorSize]);
+    console.log("llll",selectedImage);
+  }, [selectedImage]);
 
   return ProductDetail ? (
     <Container maxWidth="xl" sx={{ mb: "2rem", mt: "2rem" }}>
@@ -45,13 +52,13 @@ export default function SingleProduct() {
         <Grid container rowSpacing={1}>
           <Grid item xs={12} md={7}>
             <Box paddingX={"1rem"}>
-              <ImageContainer imgList={ProductDetail?.media_url} />
+              <ImageContainer imgList={selectedImage} />
             </Box>
           </Grid>
 
           <Grid item xs={12} md={4}>
             <Box paddingX={"1rem"}>
-              <Info ProductDetail={ProductDetail} />
+              <Info ProductDetail={ProductDetail} setSelectedImage={setSelectedImage} />
             </Box>
           </Grid>
         </Grid>

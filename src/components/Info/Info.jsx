@@ -20,10 +20,14 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../Redux/cartSlice";
 
-export default function Info({ ProductDetail, setSelectedImage }) {
+export default function Info({
+  ProductDetail,
+  setSelectedImage,
+  selectedImage,
+}) {
   const dispatch = useDispatch();
   const userToken = useSelector((state) => state.user.userToken);
-  const user_id = useSelector((state) => state.user.user.userId);
+  const user_id = useSelector((state) => state.user.user?.userId);
 
   const [quantity, setQuantity] = useState(1);
 
@@ -267,7 +271,7 @@ export default function Info({ ProductDetail, setSelectedImage }) {
             Add to cart
           </Box>
           <CardPop
-            product={ProductDetail}
+            product={{ ...ProductDetail, media_url: selectedImage }}
             handleClose={handleClose}
             open={open}
             quantity={quantity}

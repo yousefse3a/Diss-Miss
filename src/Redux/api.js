@@ -14,7 +14,7 @@ export const Login = async (user) => {
 
 export const addToCart = async (payload) => {
     console.log("add to cart", payload)
-    let { data } = await axios.put(`${baseUrl}/addtocart.php`, {
+    let { data } = await axios.post(`${baseUrl}/addtocart.php`, {
         "user_id": +payload.user_id,
         "token": payload.userToken,
         "product_id": +payload._id,

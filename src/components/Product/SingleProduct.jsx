@@ -19,6 +19,7 @@ export default function SingleProduct() {
     let { data } = await axios.get(
       `${baseUrl}/detailsproduct.php?bigid=${productID}`
     );
+    console.log("asdd",data)
     let colors = Object.keys(data.productsByColor);
     const colorSize = {};
     colors.forEach((element) => {
@@ -35,8 +36,8 @@ export default function SingleProduct() {
       });
     });
     setcolorSize(colorSize);
-    setProductDetail({ ...data.productsByCodeOrBigid[2], colorSize });
-    setSelectedImage(data.productsByCodeOrBigid[2].media_url)
+    setProductDetail({ ...data, colorSize });
+    setSelectedImage(data.media_url)
   };
   useEffect(() => {
     getProductData();
@@ -58,7 +59,7 @@ export default function SingleProduct() {
 
           <Grid item xs={12} md={4}>
             <Box paddingX={"1rem"}>
-              <Info ProductDetail={ProductDetail} setSelectedImage={setSelectedImage} />
+              <Info ProductDetail={ProductDetail} setSelectedImage={setSelectedImage} selectedImage={selectedImage} />
             </Box>
           </Grid>
         </Grid>

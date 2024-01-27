@@ -14,8 +14,8 @@ export default function Profile(props) {
   const userToken = useSelector((state) => state.user.userToken);
 
   function handleLogOut() {
-    dispatch(updateUserCartApi(userToken));
-    dispatch(deleteCart());
+    // dispatch(updateUserCartApi(userToken));
+    // dispatch(deleteCart());
     dispatch(Logout());
   }
   return (

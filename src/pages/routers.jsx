@@ -29,10 +29,15 @@ export default function Routers() {
           index: true,
           element: <Home />,
         },
-        // { path: "/t", element: <Carttosta /> },
         { path: "/Bestseller", element: <Bestseller /> },
-
-        { path: "/cart", element: <Cart /> },
+        {
+          path: "/cart",
+          element: (
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          ),
+        },
         {
           path: "/AllProducts",
           element: <Products />,
@@ -61,7 +66,6 @@ export default function Routers() {
           path: "/Register",
           element: (
             <>
-              {" "}
               {userToken ? <Navigate to={"/"} replace={true} /> : <Register />}
             </>
           ),

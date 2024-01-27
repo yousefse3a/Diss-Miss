@@ -44,9 +44,9 @@ export default function Navbar() {
       : (document.body.style.overflow = "");
     mobMenuIcon == false ? setmobMenuIcon(true) : setmobMenuIcon(false);
     console.log(menu.current.style.left);
-    menu.current.style.left == "-100%" || menu.current.style.left == ""
+    menu.current.style.left == "-110%" || menu.current.style.left == ""
       ? (menu.current.style.left = "0px")
-      : (menu.current.style.left = "-100%");
+      : (menu.current.style.left = "-110%");
   };
 
   return (
@@ -55,7 +55,7 @@ export default function Navbar() {
         <Container position={"relative"}>
           <Grid container item justifyContent="space-between">
             <Grid
-              xs={2}
+              xs={0}
               container
               item
               sx={{
@@ -74,7 +74,8 @@ export default function Navbar() {
               container
               item
               sx={{
-                display: { xs: "flex", md: "none" },
+                display: { xs: "flex", md: "flex" },
+                // display: { xs: "flex", md: "none" },
                 justifyContent: "space-between",
                 alignItems: "center",
                 alignContent: "stretch",
@@ -160,7 +161,8 @@ export default function Navbar() {
           </Grid>
         </Container>
         <Container
-          sx={{ display: { xs: "none", md: "flex" }, justifyContent: "center" }}
+          sx={{ display: { xs: "none", md: "none" }, justifyContent: "center" }}
+          // sx={{ display: { xs: "none", md: "flex" }, justifyContent: "center" }}
         >
           <Grid
             sx={{
@@ -197,9 +199,10 @@ export default function Navbar() {
           height: `calc(100vh - 107px)`,
           zIndex: "10000",
           position: "absolute",
-          left: "-100%",
+          left: "-110%",
           transition: ".5s linear",
-          display: { xs: "block", md: "none" },
+          display: { xs: "block", md: "block" },
+          // display: { xs: "block", md: "none" },
         }}
         onClick={() => {
           closeOpenMenu();

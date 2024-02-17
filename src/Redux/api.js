@@ -1,9 +1,10 @@
 import axios from "axios";
-export const baseUrl = 'https://kawadermedical.com/dissmiss'
+export const baseUrl = 'http://66.29.149.18:8050'
+// export const baseUrl = 'https://kawadermedical.com/dissmiss'
 
 export const Login = async (user) => {
     const { data } = await axios.post(
-        `${baseUrl}/login.php`,
+        `${baseUrl}/login`,
         {
             identifier: user.email,
             password: user.pass

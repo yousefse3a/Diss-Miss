@@ -66,7 +66,7 @@ export default function Register() {
   const onSubmit = async (inputs) => {
     setisLoading(true);
     console.log(inputs);
-    let { data } = await axios.post(`${baseUrl}/register.php`, {
+    let { data } = await axios.post(`${baseUrl}/register`, {
       username: `${inputs.Fname} ${inputs.Lname}`,
       email: inputs.Email,
       password: inputs.Password,

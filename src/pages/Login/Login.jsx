@@ -56,10 +56,22 @@ export default function Login() {
   const onSubmit = async (inputs) => {
     setisLoading(true);
     console.log(inputs);
-    let { data } = await axios.post(`${baseUrl}/login.php`, {
+    let { data } = await axios.post(`${baseUrl}/login`, {
       identifier: inputs.Email,
       password: inputs.Password,
     });
+    // let data =await fetch(`${baseUrl}/login`, {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     identifier: inputs.Email,
+    //     password: inputs.Password,
+    //   }),
+    // });
+    // console.log("trying fetch", data);
     if (data.success) {
       dispatch(userAuth({ email: inputs.Email, pass: inputs.Password }));
     } else {

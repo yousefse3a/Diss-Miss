@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://kawadermedical.com/dissmiss/"
+const baseUrl = "http://66.29.149.18:8050"
 
 export async function getEntity({ pageNumber = 1, setLoading, setAllProduct }) {
     // console.log(pageNumber)
